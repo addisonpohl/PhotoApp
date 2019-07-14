@@ -25,4 +25,5 @@ class Api::PhotosController < ApplicationController
     @photo.destroy
     render json: {message: "Photo: #{name} Deleted"}
   end
+
 end
