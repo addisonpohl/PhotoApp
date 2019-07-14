@@ -18,4 +18,11 @@ class Api::PhotosController < ApplicationController
     )
     render "show.json.jbuilder"
   end
+
+  def delete
+    @photo = Photo.find_by(id: params[:id])
+    name = @photo.name
+    @photo.destroy
+    render json: {message: "Photo: #{name} Deleted"}
+  end
 end
