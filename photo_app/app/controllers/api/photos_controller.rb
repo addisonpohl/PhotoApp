@@ -3,8 +3,15 @@ class Api::PhotosController < ApplicationController
   def index
     p "current_user"
     p current_user
-    @photos = Photo.all
-    render "index.json.jbuilder"
+    #@photos = Photo.all
+
+    if current_user
+      @photos = current_user.photos
+      render "index.json.jbuilder"
+    else
+      render json: []
+    end
+
   end
 
   def show
@@ -16,13 +23,13 @@ class Api::PhotosController < ApplicationController
     @photo = Photo.create(
       name: params[:name],
       width: params[:width],
-      height: params[:height]
+      height: params[:height],
+      user_id: params[:user_id]
     )
     render "show.json.jbuilder"
   end
 
   def update
-
     @photo = Photo.find_by(id: params[:id])
     @photo.name = params[:name] || @photo.name
     @photo.height = params[:height] || @photo.height
