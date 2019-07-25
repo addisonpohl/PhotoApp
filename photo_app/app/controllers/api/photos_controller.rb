@@ -24,7 +24,7 @@ class Api::PhotosController < ApplicationController
       name: params[:name],
       width: params[:width],
       height: params[:height],
-      user_id: params[:user_id]
+      user_id: current_user.id
     )
     render "show.json.jbuilder"
   end
